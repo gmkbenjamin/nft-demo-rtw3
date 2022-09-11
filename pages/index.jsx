@@ -30,6 +30,19 @@ const Home = () => {
     }
 
     if (nfts) {
+      console.log(nfts.pageKey);
+      var morenfts;
+      var nextpage = true;
+      while (nextpage){
+        console.log("fetching next page");
+        var fetchURL = `${baseURL}?owner=${wallet}&pageKey=${nfts.pageKey}`;
+        morenfts = await fetch(fetchURL, requestOptions).then(data => data.json())
+        if(typeof morenfts.pageKey === "undefined"){
+          nextpage = false;
+        }
+        nfts.ownedNfts = nfts.ownedNfts.concat(morenfts.ownedNfts);
+      }
+      
       console.log("nfts:", nfts)
       setNFTs(nfts.ownedNfts)
     }

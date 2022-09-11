@@ -1,5 +1,9 @@
 export const NFTCard = ({ nft }) => {
 
+  const copyText = async (event) => { 
+    navigator.clipboard.writeText(event.currentTarget.value);
+
+}
     return (
       <div className="w-1/4 flex flex-col ">
         <div className="rounded-md">
@@ -9,7 +13,8 @@ export const NFTCard = ({ nft }) => {
           <div className="">
             <h2 className="text-xl text-gray-800">{nft.title}</h2>
             <p className="text-gray-600">Id: {nft.id.tokenId}</p>
-            <p className="text-gray-600" >{nft.contract.address}</p>
+            <br/>
+            <button value={nft.contract.address} onClick={copyText}><img src='copy-svgrepo-com.svg' width="20" height="20"/></button><p className="text-gray-600">{nft.contract.address}</p>
           </div>
   
           <div className="flex-grow mt-2">
